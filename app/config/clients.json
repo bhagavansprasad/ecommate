@@ -1,0 +1,8 @@
+{
+    "clients": [
+        {
+            "name": "ecommerce",
+            "db_url": "postgresql://qadmin:jnjnuh@localhost/qcommerce"
+        }
+    ]
+}
