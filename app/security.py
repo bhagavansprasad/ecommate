@@ -46,30 +46,3 @@ def decode_access_token(token: str) -> dict:
         whereami()
         raise HTTPException(status_code=401, detail="Invalid token.....\n")
     
-    
-
-# OAuth2 Password Bearer for extracting the token from the "Authorization" header
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
-
-def get_current_token(token: str = Depends(oauth2_scheme)) -> dict:
-    """
-    Extract and decode the JWT token from the Authorization header.
-    """
-    try:
-        print(f"Token received: {token}")  # Log the received token
-        payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
-        print(f"Decoded payload: {payload}")  # Log the decoded payload
-        return payload
-    except jwt.ExpiredSignatureError:
-        raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Token has expired",
-            headers={"WWW-Authenticate": "Bearer"},
-        )
-    except jwt.InvalidTokenError as e:
-        print(f"Token validation error: {str(e)}")  # Log token errors
-        raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Invalid token",
-            headers={"WWW-Authenticate": "Bearer"},
-        )

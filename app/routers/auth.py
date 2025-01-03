@@ -2,9 +2,8 @@ from fastapi import APIRouter, Depends, HTTPException, Form
 from sqlalchemy.orm import Session
 from app.dependencies import get_db
 from app.models import User, Role, UserRole
-from app.security import create_access_token, verify_password
+from app.security import create_access_token
 import logging
-from pdbwhereami import whereami
 
 router = APIRouter()
 
@@ -14,8 +13,6 @@ def login(
     password: str = Form(...),
     db: Session = Depends(get_db)
 ):
-    whereami()
-
     # Log database connection details
     engine = db.get_bind()
     database_url = str(engine.url)
