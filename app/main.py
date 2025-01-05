@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from app.routers import auth, movies
 from app.database import Base, engine
 from app.config import load_clients
