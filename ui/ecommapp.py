@@ -27,7 +27,7 @@ def initialize_session():
 def authenticate_user(username, password):
     """Authenticate user and store session details in cookies."""
     response = requests.post(
-        f"{BASE_URL}/token",
+        f"{BASE_URL}/login",
         headers={"Content-Type": "application/x-www-form-urlencoded"},
         data={"username": username, "password": password},
     )

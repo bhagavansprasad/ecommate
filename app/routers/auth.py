@@ -7,7 +7,7 @@ import logging
 
 router = APIRouter()
 
-@router.post("/token")
+@router.post("/login")
 def login(
     username: str = Form(...),
     password: str = Form(...),
